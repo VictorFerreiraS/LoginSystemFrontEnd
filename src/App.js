@@ -1,6 +1,6 @@
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import SignIn from "./signin/SignIn";
 import SignUpController from "./signup/SignUpController";
 

@@ -5,11 +5,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import {Link, Paper} from "@mui/material";
 import axios from "axios";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
+import {NavLink} from "react-router-dom";
 
 export default function SignUp() {
   const [responseStatus, setResponseStatus] = React.useState();
@@ -90,7 +91,6 @@ export default function SignUp() {
                     </Field>
                     <ErrorMessage name={"firstName"} />
                   </Grid>
-
                   <Grid item xs={6}>
                     <Field name={"lastName"}>
                       {({ field }) => (
@@ -104,7 +104,6 @@ export default function SignUp() {
                     </Field>
                     <ErrorMessage name={"lastName"} />
                   </Grid>
-
                   <Grid item xs={12}>
                     <Field name={"email"}>
                       {({ field }) => (
@@ -141,6 +140,11 @@ export default function SignUp() {
                     >
                       Submit
                     </Button>
+                  </Grid>{" "}
+                  <Grid item xs={12}>
+                    <NavLink to={"/"}>
+                      <Link>Already has an account? Sign In!</Link>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Form>

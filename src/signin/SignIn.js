@@ -5,10 +5,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import {Link, Paper} from "@mui/material";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
+import {NavLink} from "react-router-dom";
 
 export default function SignIn() {
   const initialValues = {
@@ -87,6 +88,16 @@ export default function SignIn() {
                     >
                       Submit
                     </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <NavLink to={"/signup"}>
+                      <Link>Don't have an account? Sign Up!</Link>
+                    </NavLink>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <NavLink to={"/reset-password"}>
+                      <Link>Forgot your password?</Link>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Form>
