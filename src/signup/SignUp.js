@@ -5,21 +5,24 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {Link, Paper} from "@mui/material";
+import { Link, Paper } from "@mui/material";
 import axios from "axios";
 
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 export default function SignUp() {
+  useDocumentTitle("Sign Up");
+
   const [responseStatus, setResponseStatus] = React.useState();
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: "Victor",
+    lastName: "Ferreira",
+    email: "victor.fagundes586@gmail.com",
+    password: "123456789",
   };
 
   const validationSchema = Yup.object({

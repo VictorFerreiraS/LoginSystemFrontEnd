@@ -1,28 +1,25 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import useDocumentTitle from "../hooks/useDocumentTitle";
+import * as Yup from "yup";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link, Paper } from "@mui/material";
-
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import * as React from "react";
+import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
-import useDocumentTitle from "../hooks/useDocumentTitle";
 
-export default function SignIn() {
-  useDocumentTitle("Sign In");
+export default function ForgotPassword() {
+  useDocumentTitle("Forgot Password");
 
   const initialValues = {
     email: "",
-    password: "",
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().required("Required").email("invalid email address"),
-    password: Yup.string().required("Required"),
+    email: Yup.string().required().email("Invalid email address!"),
   });
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {};
@@ -53,9 +50,15 @@ export default function SignIn() {
               <Form>
                 <Grid padding={"20px"} container spacing={2}>
                   <Grid item xs={12} id={"alignCenter"}>
-                    <Typography variant={"h5"}> Sign In</Typography>
+                    <Typography variant={"h5"}>Forgot Password?</Typography>
                   </Grid>
                   <Grid item xs={12}>
+                    <Typography variant={"subtitle2"}>
+                      Type your email to reset your password!
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    {" "}
                     <Field name={"email"}>
                       {({ field }) => (
                         <TextField
@@ -69,19 +72,6 @@ export default function SignIn() {
                     <ErrorMessage name={"email"} />
                   </Grid>
                   <Grid item xs={12}>
-                    <Field name={"password"}>
-                      {({ field }) => (
-                        <TextField
-                          label="Password"
-                          variant="outlined"
-                          fullWidth
-                          {...field}
-                        />
-                      )}
-                    </Field>
-                    <ErrorMessage name={"password"} />
-                  </Grid>
-                  <Grid item xs={12}>
                     <Button
                       type="submit"
                       variant="contained"
@@ -92,14 +82,10 @@ export default function SignIn() {
                       Submit
                     </Button>
                   </Grid>
-                  <Grid item xs={6}>
-                    <NavLink to={"/signup"}>
-                      <Link>Don't have an account? Sign Up!</Link>
-                    </NavLink>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <NavLink to={"/forgot-password"}>
-                      <Link>Forgot your password?</Link>
+
+                  <Grid item xs={12}>
+                    <NavLink to={"/"}>
+                      <Link>Go back?</Link>
                     </NavLink>
                   </Grid>
                 </Grid>
