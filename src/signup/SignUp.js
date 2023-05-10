@@ -6,12 +6,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link, Paper } from "@mui/material";
-import axios from "axios";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import instance from "../axios/axiosInstance";
 
 export default function SignUp() {
   useDocumentTitle("Sign Up");
@@ -36,8 +36,8 @@ export default function SignUp() {
   });
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
-    axios
-      .post("http://localhost:8080/api/v1/users/register-user", values)
+    instance
+      .post("http://localhost:8080/api/v1/auth/register", values)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
