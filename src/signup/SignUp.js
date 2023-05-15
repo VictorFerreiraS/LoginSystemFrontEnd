@@ -22,7 +22,7 @@ export default function SignUp() {
     firstName: "Victor",
     lastName: "Ferreira",
     email: "victor.fagundes586@gmail.com",
-    password: "123456789",
+    password: "password",
   };
 
   const validationSchema = Yup.object({
@@ -43,7 +43,6 @@ export default function SignUp() {
         if (response.status === 200) {
           console.log(response.status);
           setResponseStatus(true);
-          console.log(responseStatus);
         }
       })
       .catch((error) => console.log(error));

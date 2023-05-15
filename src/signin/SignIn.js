@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -9,15 +10,25 @@ import { Link, Paper } from "@mui/material";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import instance from "../axios/axiosInstance";
 
 export default function SignIn() {
   useDocumentTitle("Sign In");
+  const [name, setName] = useState();
+  const [responseStatus, setResponseStatus] = useState();
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+
+  // setFullName(firstName, lastName) => {
+  //   let fullName = firstName + " " + lastName;
+  //   setName(fullName);
+  // }
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "victor.fagundes586@gmail.com",
+    password: "password",
   };
 
   const validationSchema = Yup.object({
@@ -25,7 +36,19 @@ export default function SignIn() {
     password: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values, { resetForm, setSubmitting }) => {};
+  const onSubmit = (values, { resetForm, setSubmitting }) => {
+    instance
+      .post("http://localhost:8080/api/v1/auth/authenticate", values)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
+          navigate("/user-info");
+        } else {
+          setError("email or password incorrect");
+        }
+      });
+  };
 
   return (
     <Formik
