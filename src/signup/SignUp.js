@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -9,14 +10,15 @@ import { Link, Paper } from "@mui/material";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import instance from "../axios/axiosInstance";
 
 export default function SignUp() {
   useDocumentTitle("Sign Up");
-
-  const [responseStatus, setResponseStatus] = React.useState();
+  const [buttonColor, setButtonColor] = useState("primary");
+  const [buttonMessage, setButtonMessage] = useState("Submit");
+  const navigate = useNavigate();
 
   const initialValues = {
     firstName: "Victor",
@@ -36,16 +38,20 @@ export default function SignUp() {
   });
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
+    setButtonMessage("loading...");
     instance
       .post("http://localhost:8080/api/v1/auth/register", values)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          console.log(response.status);
-          setResponseStatus(true);
+          localStorage.setItem("token", response.data.token);
+          navigate("/user-info");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setButtonColor("error");
+        setButtonMessage("Email Taken");
+      });
 
     // Reset the form and set isSubmitting to false
     resetForm();
@@ -110,6 +116,10 @@ export default function SignUp() {
                     <Field name={"email"}>
                       {({ field }) => (
                         <TextField
+                          onFocus={() => {
+                            setButtonColor("primary");
+                            setButtonMessage("submit");
+                          }}
                           label="Email"
                           variant="outlined"
                           fullWidth
@@ -136,11 +146,11 @@ export default function SignUp() {
                     <Button
                       type="submit"
                       variant="contained"
-                      color="primary"
                       fullWidth
                       disabled={isSubmitting}
+                      color={buttonColor}
                     >
-                      Submit
+                      {buttonMessage}
                     </Button>
                   </Grid>{" "}
                   <Grid item xs={12}>
