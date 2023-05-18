@@ -6,6 +6,7 @@ import SignUpController from "./signup/SignUpController";
 import ForgotPassword from "./forgot_password/ForgotPassword";
 import UserInfoController from "./userInfo/UserInfoController";
 import { QueryClient, QueryClientProvider } from "react-query";
+import NavbarController from "./navbar/NavbarController";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,7 @@ function App() {
     <Box className="App">
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          {/* <NavbarController /> */}
+          <NavbarController />
           <Routes>
             <Route exact path="/" element={<SignInView />} />
             <Route exact path="/signup" element={<SignUpController />} />
