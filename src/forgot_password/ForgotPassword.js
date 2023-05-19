@@ -3,7 +3,7 @@ import useDocumentTitle from "../hooks/useDocumentTitle";
 import * as Yup from "yup";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Link, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -84,9 +84,7 @@ export default function ForgotPassword() {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <NavLink to={"/"}>
-                      <Link>Go back?</Link>
-                    </NavLink>
+                    <NavLink to={"/"}>Go back?</NavLink>
                   </Grid>
                 </Grid>
               </Form>

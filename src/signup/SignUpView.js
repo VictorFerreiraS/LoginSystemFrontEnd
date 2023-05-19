@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -14,7 +14,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import instance from "../axios/axiosInstance";
 
-export default function SignUp() {
+export default function SignUpView() {
   useDocumentTitle("Sign Up");
   const [buttonColor, setButtonColor] = useState("primary");
   const [buttonMessage, setButtonMessage] = useState("Submit");
@@ -49,8 +49,13 @@ export default function SignUp() {
         }
       })
       .catch((error) => {
-        setButtonColor("error");
-        setButtonMessage("Email Taken");
+        if (error.code === "ERR_BAD_REQUEST") {
+          setButtonMessage("Email taken");
+          setButtonColor("error");
+        } else {
+          setButtonMessage("Internal Server Error");
+          setButtonColor("error");
+        }
       });
 
     // Reset the form and set isSubmitting to false
@@ -154,9 +159,7 @@ export default function SignUp() {
                     </Button>
                   </Grid>{" "}
                   <Grid item xs={12}>
-                    <NavLink to={"/"}>
-                      <Link>Already has an account? Sign In!</Link>
-                    </NavLink>
+                    <NavLink to={"/"}>Already has an account? Sign In!</NavLink>
                   </Grid>
                 </Grid>
               </Form>

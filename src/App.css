@@ -12,3 +12,11 @@
  background-color: red;
  color: red;
 }
+
+a {
+ color: #1976d2;
+}
+
+a:visited {
+ color: #1976d2;
+}

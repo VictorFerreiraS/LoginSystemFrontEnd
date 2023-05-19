@@ -1,10 +1,10 @@
 import React from "react";
-import SignUp from "./SignUp";
+import SignUpView from "./SignUpView";
 
 export default function SignUpController() {
   return (
     <>
-      <SignUp />
+      <SignUpView />
     </>
   );
 }
