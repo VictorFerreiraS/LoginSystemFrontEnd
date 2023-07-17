@@ -1,12 +1,10 @@
 import { Box } from "@mui/material";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignInView from "./signin/SignInView";
-import SignUpController from "./signup/SignUpController";
-import ForgotPassword from "./forgot_password/ForgotPassword";
-import UserInfoController from "./userInfo/UserInfoController";
+import ForgotPassword from "./pages/forgot_password/ForgotPassword";
+import UserInfoController from "./pages/userInfo/UserInfoController";
 import { QueryClient, QueryClientProvider } from "react-query";
-import NavbarController from "./navbar/NavbarController";
+import MainPageController from "./pages/mainpage/MainPageController";
 
 const queryClient = new QueryClient();
 
@@ -15,10 +13,9 @@ function App() {
     <Box className="App">
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <NavbarController />
+          {/*<NavbarController />*/}
           <Routes>
-            <Route exact path="/" element={<SignInView />} />
-            <Route exact path="/signup" element={<SignUpController />} />
+            <Route exact path="/" element={<MainPageController />} />
             <Route
               exact
               path={"/forgot-password"}

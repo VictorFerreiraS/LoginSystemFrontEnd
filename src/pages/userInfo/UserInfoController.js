@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import UserInfoView from "./UserInfoView";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import { login } from "../features/user";
+import { login } from "../../features/user";
 import { redirect } from "react-router-dom";
 
 const fetchUserData = async () => {
-  return await fetch("http://localhost:8080/api/v1/auth/user", {
+  return await fetch("http://localhost:8080/api/v1/user/get-user", {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   }).then((response) => {
     return response.json();
@@ -17,6 +17,14 @@ export default function UserInfoController() {
   const dispatch = useDispatch();
   const { data, status } = useQuery("userData", fetchUserData);
 
+  const deleteUser = async () => {
+    return await fetch("http://localhost:8080/api/v1/user/delete-user", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((response) => {
+      return response.json();
+    });
+  };
+
   // Dispatch an action with the user data
   useEffect(() => {
     if (status === "success") {
@@ -26,6 +34,9 @@ export default function UserInfoController() {
           isEmpty: false,
         })
       );
+    } else {
+      console.log(data);
+      console.log(status);
     }
   }, [data, dispatch, status]);
 
@@ -49,7 +60,7 @@ export default function UserInfoController() {
 
   return (
     <>
-      <UserInfoView logout={{ logout }} />
+      <UserInfoView logout={{ logout, deleteUser }} />
     </>
   );
 }
