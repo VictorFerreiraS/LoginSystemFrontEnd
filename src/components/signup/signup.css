@@ -1,7 +1,12 @@
-.sign_up_form_wrapper {
+.sign-up-form-wrapper {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.sign-up-form-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import instance from "../../axios/axiosInstance";
 
-export default function SignInController() {
+export default function SignInController({ toggleForms, setToggleForms }) {
   const navigate = useNavigate();
   const [buttonColor, setButtonColor] = useState("primary");
   const [buttonMessage, setButtonMessage] = useState("Submit");
@@ -48,6 +48,8 @@ export default function SignInController() {
   return (
     <div>
       <SignInView
+        toggleForms={toggleForms}
+        setToggleForms={setToggleForms}
         buttonMessage={buttonMessage}
         buttonColor={buttonColor}
         onSubmit={onSubmit}

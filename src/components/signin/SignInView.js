@@ -15,67 +15,86 @@ export default function SignInView({
   validationSchema,
   setButtonColor,
   setButtonMessage,
+  toggleForms,
+  setToggleForms,
 }) {
   useDocumentTitle("Sign In");
 
-  return (
-    <Formik
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-    >
-      {({ isSubmitting }) => (
-        <Form className="sign_in_form_wrapper">
-          <Grid container rowSpacing={2} direction={"column"} maxWidth={350}>
-            <Grid item>
-              <Typography variant="h5">Sign In</Typography>
+  if (toggleForms) {
+    return (
+      <Formik
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+      >
+        {({ isSubmitting }) => (
+          <Form className="sign_in_form_wrapper">
+            <Grid container rowSpacing={2} direction={"column"} maxWidth={350}>
+              <Grid item>
+                <Typography variant="h5">Sign In</Typography>
+              </Grid>
+              <Grid item>
+                <Field name={"email"}>
+                  {({ field }) => (
+                    <TextField
+                      onFocus={() => {
+                        setButtonColor("primary");
+                        setButtonMessage("submit");
+                      }}
+                      fullWidth={true}
+                      label="Email"
+                      variant="outlined"
+                      {...field}
+                    />
+                  )}
+                </Field>
+              </Grid>
+              <Grid item>
+                <Field name={"password"}>
+                  {({ field }) => (
+                    <TextField
+                      onFocus={() => {
+                        setButtonColor("primary");
+                        setButtonMessage("submit");
+                      }}
+                      fullWidth={true}
+                      label="Password"
+                      variant="outlined"
+                      {...field}
+                    />
+                  )}
+                </Field>
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  color={buttonColor}
+                  fullWidth={true}
+                  variant="contained"
+                >
+                  {buttonMessage}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Field name={"email"}>
-                {({ field }) => (
-                  <TextField
-                    onFocus={() => {
-                      setButtonColor("primary");
-                      setButtonMessage("submit");
-                    }}
-                    fullWidth={true}
-                    label="Email"
-                    variant="outlined"
-                    {...field}
-                  />
-                )}
-              </Field>
-            </Grid>
-            <Grid item>
-              <Field name={"password"}>
-                {({ field }) => (
-                  <TextField
-                    onFocus={() => {
-                      setButtonColor("primary");
-                      setButtonMessage("submit");
-                    }}
-                    fullWidth={true}
-                    label="Password"
-                    variant="outlined"
-                    {...field}
-                  />
-                )}
-              </Field>
-            </Grid>
-            <Grid item>
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                color={buttonColor}
-                fullWidth={true}
-                variant="contained"
-              >
-                {buttonMessage}
-              </Button>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
-  );
+          </Form>
+        )}
+      </Formik>
+    );
+  } else {
+    return (
+      <Grid className="sign_in_form_wrapper" container>
+        <Grid className={"sign-in-form-button-wrapper"} item xs={12}>
+          <Button
+            onClick={() =>
+              toggleForms ? setToggleForms(false) : setToggleForms(true)
+            }
+            variant={"outlined"}
+          >
+            Sign In
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  }
 }

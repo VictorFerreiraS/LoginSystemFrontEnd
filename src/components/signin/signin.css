@@ -5,3 +5,8 @@
   justify-content: center;
   flex-direction: column;
 }
+.sign-in-form-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
