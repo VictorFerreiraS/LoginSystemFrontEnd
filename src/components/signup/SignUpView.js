@@ -5,9 +5,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "./signup.css";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { NavLink } from "react-router-dom";
+import { Field, Form, Formik } from "formik";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
+import { Box, Paper } from "@mui/material";
 
 export default function SignUpView({
   buttonMessage,
@@ -17,27 +17,44 @@ export default function SignUpView({
   validationSchema,
   setButtonColor,
   setButtonMessage,
-  toggleForms,
-  setToggleForms,
+  isSignInOpen,
+  setIsSignInOpen,
+  signUpFormPaperClassName,
+  handleAnimationToggle,
 }) {
   useDocumentTitle("Sign Up");
 
-  if (toggleForms) {
-    return (
-      <Grid className="sign-up-form-wrapper" container>
-        <Grid className="sign-up-form-button-wrapper" item xs={12}>
-          <Button
-            onClick={() =>
-              toggleForms ? setToggleForms(false) : setToggleForms(true)
-            }
-            variant={"outlined"}
+  function handleSignInToggle() {
+    if (isSignInOpen) {
+      isSignInOpen ? setIsSignInOpen(false) : setIsSignInOpen(true);
+      handleAnimationToggle();
+    }
+  }
+
+  return (
+    <Box className={"sign-up-form-component-wrapper"}>
+      <Grid container rowSpacing={2} direction={"column"} maxWidth={350}>
+        <Grid item>
+          <Typography
+            align={"center"}
+            className={isSignInOpen ? "sign-up-title-pointer" : ""}
+            onClick={() => {
+              handleSignInToggle();
+            }}
+            variant="h5"
+            color={"primary"}
           >
             Sign Up
-          </Button>
+          </Typography>
+        </Grid>
+        <Grid item>
+          <SignUpForm />
         </Grid>
       </Grid>
-    );
-  } else {
+    </Box>
+  );
+
+  function SignUpForm() {
     return (
       <Formik
         initialValues={initialValues}
@@ -45,82 +62,74 @@ export default function SignUpView({
         onSubmit={onSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="sign-up-form-wrapper">
-            <Grid container rowSpacing={2} maxWidth={350}>
-              <Grid item xs={12}>
-                <Typography variant={"h5"}>Sign Up</Typography>
+          <Form>
+            <Paper className={signUpFormPaperClassName}>
+              <Grid container rowSpacing={2} maxWidth={350}>
+                <Grid item xs={6}>
+                  <Field name={"firstName"}>
+                    {({ field }) => (
+                      <TextField
+                        label="First Name"
+                        variant="outlined"
+                        fullWidth
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid item xs={6}>
+                  <Field name={"lastName"}>
+                    {({ field }) => (
+                      <TextField
+                        label="Last Name"
+                        variant="outlined"
+                        fullWidth
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid item xs={12}>
+                  <Field name={"email"}>
+                    {({ field }) => (
+                      <TextField
+                        onFocus={() => {
+                          setButtonColor("primary");
+                          setButtonMessage("submit");
+                        }}
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid item xs={12}>
+                  <Field name={"password"}>
+                    {({ field }) => (
+                      <TextField
+                        label="Password"
+                        variant="outlined"
+                        fullWidth
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    disabled={isSubmitting || isSignInOpen}
+                    color={buttonColor}
+                  >
+                    {buttonMessage}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <Field name={"firstName"}>
-                  {({ field }) => (
-                    <TextField
-                      label="First Name"
-                      variant="outlined"
-                      fullWidth
-                      {...field}
-                    />
-                  )}
-                </Field>
-                <ErrorMessage name={"firstName"} />
-              </Grid>
-              <Grid item xs={6}>
-                <Field name={"lastName"}>
-                  {({ field }) => (
-                    <TextField
-                      label="Last Name"
-                      variant="outlined"
-                      fullWidth
-                      {...field}
-                    />
-                  )}
-                </Field>
-                <ErrorMessage name={"lastName"} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name={"email"}>
-                  {({ field }) => (
-                    <TextField
-                      onFocus={() => {
-                        setButtonColor("primary");
-                        setButtonMessage("submit");
-                      }}
-                      label="Email"
-                      variant="outlined"
-                      fullWidth
-                      {...field}
-                    />
-                  )}
-                </Field>
-                <ErrorMessage name={"email"} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name={"password"}>
-                  {({ field }) => (
-                    <TextField
-                      label="Password"
-                      variant="outlined"
-                      fullWidth
-                      {...field}
-                    />
-                  )}
-                </Field>
-                <ErrorMessage name={"password"} />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  disabled={isSubmitting}
-                  color={buttonColor}
-                >
-                  {buttonMessage}
-                </Button>
-              </Grid>{" "}
-              <Grid item xs={12}>
-                <NavLink to={"/"}>Already has an account? Sign In!</NavLink>
-              </Grid>
-            </Grid>
+            </Paper>
           </Form>
         )}
       </Formik>

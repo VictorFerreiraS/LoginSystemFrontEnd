@@ -1,3 +1,8 @@
-.form-components-wrapper {
-    transition: 3s;
+.sign-in-component-wrapper {
+    /*background-color: blanchedalmond;*/
+    transition-duration: 3s;
+}
+
+.sign-up-component-wrapper {
+    transition-duration: 3s;
 }

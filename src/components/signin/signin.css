@@ -1,12 +1,66 @@
-.sign_in_form_wrapper {
+.sign-in-form-component-wrapper {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
+
+.sign-in-form-component-wrapper-closed {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
 .sign-in-form-button-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.sign-in-title-pointer {
+  cursor:pointer;
+}
+
+@keyframes close {
+  0% {
+    max-height: 300px;
+  }
+  100% {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0;
+  }
+
+}
+
+@keyframes  open {
+  0% {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0;
+  }
+  100% {
+    max-height: 300px;
+  }
+}
+
+.sign-in-content-wrapper {
+  transition-duration: 3s;
+  padding: 15px;
+}
+
+.sign-in-content-wrapper-open {
+  padding: 15px;
+  animation: open 3s ease forwards;
+}
+
+.sign-in-content-wrapper-closed {
+  animation: close 3s ease forwards;
+  padding: 15px;
 }
