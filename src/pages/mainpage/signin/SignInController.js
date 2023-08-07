@@ -3,14 +3,11 @@ import SignInView from "./SignInView";
 import "./signin.css";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import instance from "../../axios/axiosInstance";
+import instance from "../../../axios/axiosInstance";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
-export default function SignInController({
-  isSignInOpen,
-  setIsSignInOpen,
-  signInFormPaperClassName,
-  handleAnimationToggle,
-}) {
+export default function SignInController({ isSignInOpen, setIsSignInOpen }) {
+  useDocumentTitle("Sign In");
   const navigate = useNavigate();
   const [buttonColor, setButtonColor] = useState("primary");
   const [buttonMessage, setButtonMessage] = useState("Submit");
@@ -62,8 +59,6 @@ export default function SignInController({
         initialValues={initialValues}
         setButtonColor={setButtonColor}
         setButtonMessage={setButtonMessage}
-        signInFormPaperClassName={signInFormPaperClassName}
-        handleAnimationToggle={handleAnimationToggle}
       />
     </div>
   );

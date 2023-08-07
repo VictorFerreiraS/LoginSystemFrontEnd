@@ -34,9 +34,6 @@ export default function UserInfoController() {
           isEmpty: false,
         })
       );
-    } else {
-      console.log(data);
-      console.log(status);
     }
   }, [data, dispatch, status]);
 

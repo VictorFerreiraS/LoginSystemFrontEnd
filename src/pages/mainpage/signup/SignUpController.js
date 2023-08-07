@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import SignUpView from "./SignUpView";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import instance from "../../axios/axiosInstance";
+import instance from "../../../axios/axiosInstance";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
-export default function SignUpController({
-  isSignInOpen,
-  setIsSignInOpen,
-  signUpFormPaperClassName,
-  handleAnimationToggle,
-}) {
+export default function SignUpController({ isSignInOpen, setIsSignInOpen }) {
+  useDocumentTitle("Sign In");
   const [buttonColor, setButtonColor] = useState("primary");
   const [buttonMessage, setButtonMessage] = useState("Submit");
   const navigate = useNavigate();
@@ -69,8 +66,6 @@ export default function SignUpController({
         initialValues={initialValues}
         setButtonColor={setButtonColor}
         setButtonMessage={setButtonMessage}
-        signUpFormPaperClassName={signUpFormPaperClassName}
-        handleAnimationToggle={handleAnimationToggle}
       />
     </>
   );

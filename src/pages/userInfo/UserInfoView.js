@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
+import NavbarController from "../../components/navbar/NavbarController";
 
 export default function UserInfoView() {
   useDocumentTitle("User");
@@ -20,38 +21,12 @@ export default function UserInfoView() {
   };
 
   if (user === undefined) {
-    return <div>Loading...</div>; // Render a loading state
+    return <Box>Loading...</Box>; // Render a loading state
   }
 
   return (
-    <Box
-      sx={{
-        backgroundImage:
-          "radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% )",
-      }}
-    >
-      <Container
-        maxWidth="xs"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Paper>
-          <Grid padding={"20px"} container spacing={2}>
-            <Grid item xs={12} id={"alignCenter"}>
-              <Typography variant="h5">Hi {user.fullName}</Typography>
-            </Grid>
-            <Grid item xs={12} id={"alignCenter"}>
-              <Button onClick={() => deleteUser()} color={"error"}>
-                Delete Me!
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
+    <Box>
+      <NavbarController />
     </Box>
   );
 }

@@ -1,8 +1,7 @@
 .sign-in-component-wrapper {
-    /*background-color: blanchedalmond;*/
-    transition-duration: 3s;
+  transition-duration: 2s;
 }
 
 .sign-up-component-wrapper {
-    transition-duration: 3s;
+  transition-duration: 2s;
 }

@@ -1,0 +1,25 @@
+.sign-in-form-component-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sign-in-form-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-title-pointer {
+  cursor: pointer;
+}
+
+.sign-in-form-content-wrapper {
+  padding: 15px;
+}
+
+.collapse-class-sign-in-wrapper {
+  transition-delay: 2s;
+}

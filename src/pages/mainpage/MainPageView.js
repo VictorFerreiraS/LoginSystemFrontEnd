@@ -1,42 +1,23 @@
 import React, { useState } from "react";
 import "./mainpage.css";
-import SignInController from "../../components/signin/SignInController";
+import SignInController from "./signin/SignInController";
 import { Grid } from "@mui/material";
-import SignUpController from "../../components/signup/SignUpController";
+import SignUpController from "./signup/SignUpController";
 
 export default function MainPageView() {
   const [isSignInOpen, setIsSignInOpen] = useState(true);
-  const [signInFormPaperClassName, setSignInFormPaperClassName] = useState(
-    "sign-in-content-wrapper"
-  );
-
-  const [signUpFormPaperClassName, setSignUpFormPaperClassName] = useState(
-    "sign-up-content-wrapper"
-  );
-
-  function handleAnimationToggle() {
-    if (isSignInOpen) {
-      setSignUpFormPaperClassName("sign-up-content-wrapper-open");
-      setSignInFormPaperClassName("sign-in-content-wrapper-closed");
-    } else {
-      setSignUpFormPaperClassName("sign-up-content-wrapper-closed");
-      setSignInFormPaperClassName("sign-in-content-wrapper-open");
-    }
-  }
 
   return (
     <>
-      <Grid container className={"forms-components-wrapper"}>
+      <Grid container>
         <Grid
+          className="sign-in-component-wrapper"
           xs={12}
           sm={isSignInOpen ? 9 : 3}
-          className="sign-in-component-wrapper"
         >
           <SignInController
             isSignInOpen={isSignInOpen}
             setIsSignInOpen={setIsSignInOpen}
-            signInFormPaperClassName={signInFormPaperClassName}
-            handleAnimationToggle={handleAnimationToggle}
           />
         </Grid>
         <Grid
@@ -47,8 +28,6 @@ export default function MainPageView() {
           <SignUpController
             isSignInOpen={isSignInOpen}
             setIsSignInOpen={setIsSignInOpen}
-            signUpFormPaperClassName={signUpFormPaperClassName}
-            handleAnimationToggle={handleAnimationToggle}
           />
         </Grid>
       </Grid>

@@ -5,6 +5,7 @@ import ForgotPassword from "./pages/forgot_password/ForgotPassword";
 import UserInfoController from "./pages/userInfo/UserInfoController";
 import { QueryClient, QueryClientProvider } from "react-query";
 import MainPageController from "./pages/mainpage/MainPageController";
+import MyAccountController from "./pages/myaccount/MyAccountController";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,11 @@ function App() {
                 exact
                 path={"/user-info"}
                 element={<UserInfoController />}
+              />
+              <Route
+                exact
+                path="/my-account"
+                element={<MyAccountController />}
               />
             </Routes>
           </BrowserRouter>

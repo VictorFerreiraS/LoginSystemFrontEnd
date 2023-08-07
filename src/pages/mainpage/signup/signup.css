@@ -1,0 +1,22 @@
+.sign-up-form-component-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-left: 1px solid #000000;
+}
+
+.sign-up-form-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-up-title-pointer {
+  cursor: pointer;
+}
+
+.sign-up-form-content-wrapper {
+  padding: 15px;
+}
