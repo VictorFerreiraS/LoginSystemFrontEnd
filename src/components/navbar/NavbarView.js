@@ -23,39 +23,39 @@ export default function NavbarView({ logout }) {
   };
 
   return (
-      <Grid container sx={{ padding: "10px 20px" }}>
-        <Grid item xs={11}>
-          <Typography variant="h5" color="white">
-            SyLogin
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Container>
-            <IconButton
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <AccountCircleIcon />
-            </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <NavLink to="/my-account">
-                <MenuItem onClick={() => handleClose()}>My Account</MenuItem>
-              </NavLink>
-              <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
-          </Container>
-        </Grid>
+    <Grid container sx={{ padding: "10px 20px" }}>
+      <Grid item xs={11}>
+        <Typography variant="h5" color="white">
+          SyLogin
+        </Typography>
       </Grid>
+      <Grid item xs={1}>
+        <Container>
+          <IconButton
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <AccountCircleIcon />
+          </IconButton>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <NavLink to="/my-account">
+              <MenuItem onClick={() => handleClose()}>My Account</MenuItem>
+            </NavLink>
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </Menu>
+        </Container>
+      </Grid>
+    </Grid>
   );
 }

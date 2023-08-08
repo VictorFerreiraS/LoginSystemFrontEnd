@@ -1,0 +1,14 @@
+.myaccount-box-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.myaccount-form-wrapper {
+  padding: 15px;
+}
+
+#nested-list-subheader {
+  background-color: transparent;
+  line-height: normal;
+}

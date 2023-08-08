@@ -20,85 +20,69 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useSelector } from "react-redux";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
+import "./myaccount.css";
 
-export default function MyAccountView() {
+export default function MyAccountView({ firstName, lastName }) {
   useDocumentTitle("Account Settings");
-  // IS NOT INSTANT NEEDS TIME TO COMPLETE
-  const user = useSelector((state) => state.user.value);
-
-  const [response, setResponse] = useState("");
-
-  const deleteUser = async () => {
-    return await fetch("http://localhost:8080/api/v1/user/delete-user", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((response) => {
-      setResponse(response);
-      return response.json();
-    });
-  };
-
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  
-  if (user === undefined) {
-    return <Box>Loading...</Box>; // Render a loading state
-  }
-
   return (
-    <Container className="test" maxWidth={"sm"}>
-      <Paper>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h5">
-              Hello
-              {/* {user.fullName} */}
-            </Typography>
+    <Box className="myaccount-box-wrapper">
+      <Container maxWidth={"sm"}>
+        <Paper className="myaccount-form-wrapper">
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography variant="h5">
+                Hello
+                {" " + firstName + " " + lastName}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <List
+                subheader={
+                  <ListSubheader component="" id="nested-list-subheader">
+                    Account Settings
+                  </ListSubheader>
+                }
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <NotificationsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Notifications" />
+                </ListItemButton>
+                <ListItemButton onClick={handleClick}>
+                  <ListItemIcon>
+                    <SecurityIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Security" />
+                  {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <PasswordIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Change Password" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <DeleteIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Delete Account" />
+                    </ListItemButton>
+                  </List>
+                </Collapse>
+              </List>
+            </Grid>
           </Grid>
-          <Grid>
-            <List
-              subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                  Account Settings
-                </ListSubheader>
-              }
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <NotificationsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Notifications" />
-              </ListItemButton>
-              <ListItemButton onClick={handleClick}>
-                <ListItemIcon>
-                  <SecurityIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <PasswordIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Change Password" />
-                  </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <DeleteIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Delete Account" />
-                  </ListItemButton>
-                </List>
-              </Collapse>
-            </List>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
